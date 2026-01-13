@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Verify OTP</title>
+<link rel="stylesheet" th:href="@{/css/forgot.css}">
+</head>
+<body>
+	<div class="container">
+		<h2>🔎 Verify OTP</h2>
+
+		<div th:if="${session.message}" class="alert alert-danger"
+			th:text="${session.message}"></div>
+
+		<form th:action="@{/verifyotp}" method="post">
+			<label>Enter OTP</label> <input type="number" name="otp"
+				placeholder="Enter OTP sent to your email" required>
+			<button type="submit">Verify</button>
+		</form>
+	</div>
+</body>
+</html>

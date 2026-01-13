@@ -1,0 +1,11 @@
+
+
+services:
+  app:
+    env_file:
+      - env_file.env
+    build: .
+    container_name: smartcontactmanager
+    restart: unless-stopped
+    ports:
+      - "8081:8080"

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/base::layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Contact Management System</title>
+
+<link rel="stylesheet" th:href="@{/css/search.js}" />
+<link rel="stylesheet" th:href="@{/css/userdash.js}" />
+</head>
+
+<body>
+
+	<section class="showcontactpage">
+
+		<div class="containers">
+			<header class="headers">
+				<h1>Your Contact</h1>
+
+			</header>
+
+			<section class="search-section">
+
+				<form th:action="@{/user/search}" method="get">
+
+					<input type="text" name="query" class="search-bar"
+						placeholder="Search contacts..." required />
+
+					<button type="submit" class="btn btn-primary">Search</button>
+
+				</form>
+				<a th:href="@{/user/addcontacts}">
+					<button class="add-contact-btn">+ Add New Contact</button>
+
+				</a> <a href="/user/download-pdf" class="btn btn-primary"> Download
+					My Contacts (PDF) </a>
+
+				<!-- message.html -->
+				<div th:if="${message}" class="alert "
+					th:classappend="'alert-' + ${message.type}" role="alert">
+					<span th:text="${message.content}"></span>
+				</div>
+			</section>
+
+
+			<div class="contents">
+				<div class="contacts-grids">
+					<div class="contact-cards" th:each="contact : ${contacts}">
+						<img
+							th:src="${contact.imageUrl != null} ? ${contact.imageUrl} : @{/images/default.png}"
+							alt="Contact Image" class="contact-images" />
+						<div class="contact-info">
+							<h3 th:text="${contact.username}">Name</h3>
+							<div class="contact-details">
+								<strong>Last Name:</strong> <span th:text="${contact.lastName}"></span>
+							</div>
+							<div class="contact-details">
+								<strong>Email:</strong> <a
+									th:href="@{'#modal' + ${contact.cId}}" class="contact-emails"
+									th:text="${contact.email}">Email</a>
+							</div>
+							<div class="contact-details">
+								<strong>Phone:</strong> <span th:text="${contact.phone}"></span>
+							</div>
+							<div class="contact-actions">
+								<form th:action="@{'/user/updatecontact/' + ${contact.cId}}"
+									method="get">
+									<button class="btn btn-update" type="submit">Update</button>
+								</form>
+								<form th:action="@{'/user/delete/' + ${contact.cId}}"
+									method="post" onsubmit="return confirm('Are you sure?');">
+									<input type="hidden" name="_method" value="delete" />
+									<button class="btn btn-delete" type="submit">Delete</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Pagination -->
+		<nav class="body-center" aria-label="Page navigation example">
+			<ul class="pagination">
+				<!-- Previous button -->
+				<li th:if="${currentPage != null and currentPage > 0}"
+					class="page-item"><a
+					th:href="@{'/user/shows/' + ${currentPage - 1}}" class="page-link">Previous</a>
+				</li>
+
+				<!-- Page numbers -->
+				<li th:each="i : ${#numbers.sequence(1, totalPages)}"
+					th:classappend="${currentPage == i - 1} ? 'active' : ''"
+					class="page-item"><a th:href="@{'/user/shows/' + ${i - 1}}"
+					class="page-link" th:text="${i}"></a></li>
+
+				<!-- Next button -->
+				<li th:if="${currentPage != null and currentPage + 1 < totalPages}"
+					class="page-item"><a
+					th:href="@{'/user/shows/' + ${currentPage + 1}}" class="page-link">Next</a>
+				</li>
+			</ul>
+		</nav>
+
+
+
+
+		<!-- Contact Detail Modals -->
+		<div th:each="contact : ${contacts}" th:id="'modal' + ${contact.cId}"
+			class="modal">
+			<div class="modal-content">
+				<a href="#" class="close-modal">&times;</a> <img
+					th:src="${contact.imageUrl != null} ? ${contact.imageUrl} : @{/images/default.png}"
+					alt="Contact Image" class="detail-image" />
+				<div class="detail-info">
+					<h2 th:text="${contact.username}"></h2>
+					<div>
+						<strong>Full Name:</strong> <span
+							th:text="${contact.username + ' ' + contact.lastName}"></span>
+					</div>
+					<div>
+						<strong>Email:</strong> <span th:text="${contact.email}"></span>
+					</div>
+					<div>
+						<strong>Phone:</strong> <span th:text="${contact.phone}"></span>
+					</div>
+					<div>
+						<strong>Address:</strong> <span th:text="${contact.address}">N/A</span>
+					</div>
+					<div>
+						<strong>Job:</strong> <span th:text="${contact.jobTitle}">N/A</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</section>
+
+
+</body>
+</html>

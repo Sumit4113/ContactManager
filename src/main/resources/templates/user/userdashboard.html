@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="user/base :: layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Home Dashboard</title>
+</head>
+<body>
+
+
+	<!-- User profile -->
+	<section>
+
+		<div class="card-shadow">
+			<div class="cardbody ">
+				<div class="box-img">
+					<img
+						th:src="${user.imageUrl != null} ? ${user.imageUrl} : @{/images/default.png}"
+						alt="Profile Picture" class="rounded-circle img-thumbnail"
+						style="width: 300px; height: 300px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);" />
+
+				</div>
+				<div class="box2">
+					<h3 class="card-title" th:text="${user.name}">User Name</h3>
+					<p class="card-text">
+						<strong>Email:</strong> <span th:text="${user.email}">email@example.com</span>
+					</p>
+					<p class="card-text text-muted">
+						<strong>User ID:</strong> <span th:text="${user.id}">123</span>
+					</p>
+					<p class="card-text text-muted">
+						<strong>Total Contacts:</strong> <span
+							th:text="${user.contact.size()}">0</span>
+					</p>
+				</div>
+			</div>
+
+
+			<!-- Stats Grid -->
+			<div class="stats-grid">
+				<div class="stat-card">
+					<div class="stat-number" th:text="${totalContacts}">156</div>
+					<div class="stat-label">Total Contacts</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-number">24</div>
+					<div class="stat-label">Favorites</div>
+				</div>
+
+				<div class="stat-card">
+					<a th:href="@{/user/shows/0}">
+						<button class="stat-card">+ Show Contacts</button>
+
+					</a>
+				</div>
+
+				<div class="stat-card">
+					<a th:href="@{/user/addcontacts}">
+						<button class="stat-card">+ Add New Contact</button>
+
+					</a>
+
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+</body>
+</html>
