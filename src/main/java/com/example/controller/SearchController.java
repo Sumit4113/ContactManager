@@ -24,24 +24,16 @@ public class SearchController {
 	@Autowired
 	private ContactRepository contactrepo;
 
-	// Corrected URL path
-	@GetMapping("/search")
-	public String searchContacts(
-	        @RequestParam("query") String query,
-	        Principal principal,
-	        Model model) {
-
-	    User user = userRepo.findByUserName(principal.getName());
-
-	    List<Contact> contacts = contactrepo.findByUsernameContainingOrEmailContainingOrPhoneContainingAndUser(
-	            query, query, query, user);
-
-	    model.addAttribute("contacts", contacts);  // this is used in Thymeleaf
-	    model.addAttribute("searchQuery", query);   // for input value
-	    model.addAttribute("totalPages", 1);        // optional if you want pagination
-	    model.addAttribute("currentPage", 0);
-
-	    return "user/showcontact"; // same page
+	@GetMapping("/search/{query}")
+	public  ResponseEntity<?> search(@PathVariable("query") String query, Principal principal){
+		
+		System.out.println(query);
+		
+		User user = userRepo.findByEmail(principal.getName());
+		
+	List<Contact> contact =	this.contactrepo.findByUserNameContainingAndUser(query, user);
+	
+	 return ResponseEntity.ok(contact);
 	}
 
 }

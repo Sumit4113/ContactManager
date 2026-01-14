@@ -378,9 +378,12 @@ body {
 @media ( max-width : 768px) {
 	.sidebar {
 		width: 50%;
+		
 	}
 	.main-content.sidebar-open {
 		margin-left: 0;
+		
+		
 	}
 	.header {
 		padding: 1rem;

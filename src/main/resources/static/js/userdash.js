@@ -1,13 +1,4 @@
 
-// Sample contacts data
-let contacts = [
-	{ id: 1, firstName: 'Alice', lastName: 'Miller', email: 'alice@example.com', phone: '+1-555-0101', company: 'Tech Corp' },
-	{ id: 2, firstName: 'Bob', lastName: 'Smith', email: 'bob@example.com', phone: '+1-555-0102', company: 'Design Studio' },
-	{ id: 3, firstName: 'Carol', lastName: 'Johnson', email: 'carol@example.com', phone: '+1-555-0103', company: 'Marketing Inc' },
-	{ id: 4, firstName: 'David', lastName: 'Brown', email: 'david@example.com', phone: '+1-555-0104', company: 'Finance Ltd' },
-	{ id: 5, firstName: 'Emma', lastName: 'Wilson', email: 'emma@example.com', phone: '+1-555-0105', company: 'Startup Hub' },
-	{ id: 6, firstName: 'Frank', lastName: 'Davis', email: 'frank@example.com', phone: '+1-555-0106', company: 'Consulting Group' }
-];
 
 // DOM elements
 const menuToggle = document.getElementById('menuToggle');
@@ -39,59 +30,9 @@ function closeSidebar() {
 	}
 }
 
-// Show section
-function showSection(sectionId) {
-	sections.forEach(section => {
-		section.classList.remove('active');
-	});
 
-	navItems.forEach(item => {
-		item.classList.remove('active');
-	});
 
-	document.getElementById(sectionId).classList.add('active');
-	document.querySelector(`[data-section="${sectionId}"]`).classList.add('active');
 
-	if (window.innerWidth <= 768) {
-		closeSidebar();
-	}
-}
-
-// Render contacts
-function renderContacts() {
-	contactList.innerHTML = '';
-
-	contacts.forEach(contact => {
-		const initials = (contact.firstName[0] + contact.lastName[0]).toUpperCase();
-
-		const contactCard = document.createElement('div');
-		contactCard.className = 'contact-card';
-		contactCard.innerHTML = `
-                  <div class="contact-header">
-                      <div class="contact-avatar">${initials}</div>
-                      <div class="contact-info">
-                          <h3>${contact.firstName} ${contact.lastName}</h3>
-                          <p>${contact.email}</p>
-                          <p>${contact.phone}</p>
-                          ${contact.company ? `<p style="color: #667eea; font-weight: 500;">${contact.company}</p>` : ''}
-                      </div>
-                  </div>
-                  <div class="contact-actions">
-                      <button class="btn btn-outline btn-small" onclick="editContact(${contact.id})">
-                          <span>✏️</span> Edit
-                      </button>
-                      <button class="btn btn-outline btn-small" onclick="deleteContact(${contact.id})">
-                          <span>🗑️</span> Delete
-                      </button>
-                      <button class="btn btn-primary btn-small" onclick="callContact('${contact.phone}')">
-                          <span>📞</span> Call
-                      </button>
-                  </div>
-              `;
-
-		contactList.appendChild(contactCard);
-	});
-}
 
 // Add contact
 function addContact(contactData) {
@@ -142,26 +83,7 @@ navItems.forEach(item => {
 	});
 });
 
-// Add contact form
-addContactForm.addEventListener('submit', (e) => {
-	e.preventDefault();
 
-	const formData = new FormData(addContactForm);
-	const contactData = {
-		firstName: formData.get('firstName'),
-		lastName: formData.get('lastName'),
-		email: formData.get('email'),
-		phone: formData.get('phone'),
-		company: formData.get('company'),
-		jobTitle: formData.get('jobTitle'),
-		address: formData.get('address'),
-		notes: formData.get('notes')
-	};
-
-	addContact(contactData);
-	addContactForm.reset();
-	showSection('contacts');
-});
 
 // Handle window resize
 window.addEventListener('resize', () => {

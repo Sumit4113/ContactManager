@@ -4,9 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Contact Management System</title>
+<script th:src="@{/js/search.js}" defer></script>
 
-<link rel="stylesheet" th:href="@{/css/search.js}" />
-<link rel="stylesheet" th:href="@{/css/userdash.js}" />
 </head>
 
 <body>
@@ -21,14 +20,15 @@
 
 			<section class="search-section">
 
-				<form th:action="@{/user/search}" method="get">
+				<input type="text" name="query" class="search-bar" id="searchInput"
+				onkeyup="search()"	placeholder="Search contacts..." required />
 
-					<input type="text" name="query" class="search-bar"
-						placeholder="Search contacts..." required />
+				<div class="search-result">
+					<!-- result show  -->
 
-					<button type="submit" class="btn btn-primary">Search</button>
+				</div>
 
-				</form>
+
 				<a th:href="@{/user/addcontacts}">
 					<button class="add-contact-btn">+ Add New Contact</button>
 
@@ -141,4 +141,7 @@
 
 
 </body>
+
+
+
 </html>

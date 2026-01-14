@@ -150,7 +150,9 @@ nav {
 .hero-image img {
 	width: 100px;
 	height: 100px;
-	
+	  border-radius: 50%;
+    object-fit: cover; /* prevents image stretch */
+    
 }
 
 .features-list {

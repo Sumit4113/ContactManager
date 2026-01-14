@@ -24,8 +24,8 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
 	
 	List<Contact> findByUser(User user);
 
-	public List<Contact> findByUsernameContainingOrEmailContainingOrPhoneContainingAndUser(String query, String query2,
-			String query3, User user);
+	//search method for jpa 
+	public List<Contact> findByUserNameContainingAndUser(String username, User user);
 
 
 }

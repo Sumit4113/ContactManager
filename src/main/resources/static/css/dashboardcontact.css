@@ -14,7 +14,6 @@
 	align-items: center;
 	margin-left: 100px;
 	gap: 50px;
-	
 }
 
 /* User Info */
@@ -72,16 +71,23 @@
 	padding: 20px;
 }
 
-
 @media ( max-width : 768px) {
-	.container {
-		padding: 20px;
+	.cardbody {
+		flex-direction: column; /* STACK */
+		gap: 25px;
+		text-align: center;
+		margin-left:30px;
 	}
-	.contact-card {
-		width: 250px;
+	.box2 {
+		min-width: 100%;
 	}
-	h1 {
+	.box2 h3 {
 		font-size: 20px;
-		margin-bottom: 20px;
+	}
+	.stats-grid {
+		grid-template-columns: 1fr; /* ONE COLUMN */
+	}
+	.stat-number {
+		font-size: 1.5rem;
 	}
 }
