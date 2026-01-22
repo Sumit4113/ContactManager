@@ -1,7 +1,7 @@
 # 📒 Contact Manager Application
 
-A secure and scalable **Contact Management Web Application** built using **Java & Spring Boot**.  
-This application allows users to manage contacts with full CRUD operations, secure authentication, image uploads, and automated deployment using modern DevOps practices.
+A secure and scalable monolithic **Contact Manager Web Application** built using **Java & Spring Boot**.  
+This application allows role authentication users to manage contacts with full CRUD operations, secure authentication, image uploads, and automated deployment using modern DevOps practices.
 
 ---
 
@@ -14,10 +14,9 @@ This application allows users to manage contacts with full CRUD operations, secu
 - Image Upload using **Cloudinary**  
 - Forgot Password via **SMTP Email**  
 - Secure Password Encryption  
-- RESTful APIs  
 - CI/CD using **GitHub Actions**  
 - Dockerized Application  
-- Deployed on **Render Cloud Server**
+- Deployed on **Render & koyeb Cloud Server**
 
 ---
 
@@ -27,7 +26,7 @@ This application allows users to manage contacts with full CRUD operations, secu
 - Java  
 - Spring Boot  
 - Spring Security  
-- JWT Authentication  
+- Role Based Authentication 
 - Hibernate / JPA  
 
 ### Frontend
@@ -36,7 +35,8 @@ This application allows users to manage contacts with full CRUD operations, secu
 - JavaScript  
 
 ### Database
-- MySQL  
+- MySQL
+- Redis (used via Upstash for caching in Spring Boot)
 
 ### Cloud & DevOps
 - Docker  
@@ -50,9 +50,8 @@ This application allows users to manage contacts with full CRUD operations, secu
 ## 🔐 Security
 
 - Spring Security for authentication  
-- JWT token-based authorization  
 - Encrypted passwords  
-- Protected routes  
+- Protected routes
 
 ---
 
@@ -84,17 +83,17 @@ This application allows users to manage contacts with full CRUD operations, secu
 ## 🐳 Docker Support
 
 - Application fully containerized  
-- Dockerfile included  
+- Dockerfile included and also using Compose yaml file
 - Easy local setup using Docker  
 
 ---
 
 ## 🌐 Live Deployment
 
-**Server:** Render  
+**Server:** Render and koyeb
 **Status:** Live & running  
 
-> Add your live URL here
+> live URL Koyeb : https://glamorous-marigold-sumit-devop-6ec5f3c7.koyeb.app/
 
 ---
 
@@ -104,17 +103,11 @@ This application allows users to manage contacts with full CRUD operations, secu
 - Service  
 - Repository  
 - Entity  
-- DTO  
 - Security Config  
-- Exception Handling  
+- Exception Handling
+- Hellper
 
----
 
-## 👨‍💻 Author
-
-**Sumit Jamod**  
-Java Backend Developer  
-📧 Email: jdsumit01@gmail.com  
 
 ---
 
