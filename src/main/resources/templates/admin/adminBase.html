@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+<html xmlns:th="http://www.thymeleaf.org" th:fragment="layout(adminContent)">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Contact Manager</title>
+<title>Admin Page</title>
 <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 <link rel="stylesheet" th:href="@{/css/showstyle.css}" />
 <link rel="stylesheet" th:href="@{/css/setting.css}" />
 <link rel="stylesheet" th:href="@{/css/premium.css}" />
 <link rel="stylesheet" th:href="@{/css/dashboardcontact.css}">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 <body>
 
@@ -24,38 +20,18 @@
 			<div class="sidebar-header">
 				<div class="logo">Contact Manager</div>
 				<div class="logo-subtitle">
-				<h3 class="card-title" th:text="${user.name}">User Name</h3>
+				<h3 class="card-title">Admin Name</h3>
 				</div>
 			</div>
 
 			<div class="nav-menu">
 				<div class="nav-item">
-					<a th:href="@{/user/index}" class="nav-link active"
+					<a th:href="@{/admin/adminDashboard}" class="nav-link active"
 						data-section="dashboard"> <i class="fas fa-home"></i>
 						Dashboard
 					</a>
 				</div>
-
-				<div class="nav-item">
-					<a th:href="@{/user/shows/0}" class="nav-link"
-						data-section="contacts"> <i class="fas fa-address-book"></i>
-						Contacts
-					</a>
-				</div>
-				<div class="nav-item">
-					<a th:href="@{/user/addcontacts}" href="#" class="nav-link"
-						data-section="add-contact"> <i class="fas fa-user-plus"></i>
-						Add Contact
-					</a>
-				</div>
-
-
-				<div class="nav-item">
-					<a th:href="@{/user/premiums}" class="nav-link"
-						data-section="premium"> <i class="fas fa-crown"></i> Premium
-						Features
-					</a>
-				</div>
+		
 				<div class="nav-item">
 					<a th:href="@{/user/settingpage}" class="nav-link"
 						data-section="settings"> <i class="fas fa-cog"></i> Settings
@@ -81,9 +57,10 @@
 
 
 
+		
 			<div class="content">
 				<section class="section active" id="dashboard">
-					<div th:replace="${content}"></div>
+					<div th:replace="${adminContent}"></div>
 				</section>
 
 			</div>
@@ -93,14 +70,7 @@
 	</div>
 
 
-
-
-
-
-
-
-
-	<script>
+<script>
        
         // Toggle sidebar
         function toggleSidebar() {
@@ -264,6 +234,8 @@
             mainContent.classList.add('sidebar-open');
         }
     </script>
+
+   
 
 </body>
 </html>

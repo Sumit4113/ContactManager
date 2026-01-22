@@ -1,5 +1,6 @@
 package com.example.entites;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "app_user") // Avoid using 'user' as table name in PostgreSQL
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

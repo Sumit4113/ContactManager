@@ -1,5 +1,7 @@
 package com.example.entites;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
@@ -14,7 +16,10 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table
-public class Contact {
+public class Contact implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cId;

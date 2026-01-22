@@ -25,7 +25,7 @@ import com.example.helper.Message;
 import com.example.repository.ContactRepository;
 import com.example.repository.UserRepository;
 import com.example.services.CloudinaryService;
-
+import com.example.services.ContactService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 
@@ -47,6 +47,9 @@ public class UserController {
 	@Autowired
 	private CloudinaryService cloudinaryService;
 
+	@Autowired
+	private ContactService contactService;
+
 	// Common method to add user object to all responses
 	@ModelAttribute
 	public void addCommonData(Model model, Principal principal) {
@@ -54,16 +57,14 @@ public class UserController {
 		User user = userRepo.findByUserName(userName);
 		model.addAttribute("user", user);
 	}
-    
+
 	@GetMapping("/index")
 	public String userDashboard(Authentication auth, Model model) {
 
-		String name =  auth.getName(); // logged user
+		String name = auth.getName(); // logged user
 
 		User user = userRepo.findByUserName(name);
-        
-		
-		
+
 		model.addAttribute("totalContacts", user.getContact().size());
 		model.addAttribute("contacts", user.getContact());
 
@@ -88,10 +89,8 @@ public class UserController {
 			} else {
 				contact.setImageUrl("/images/default.png"); // Optional: default image
 			}
-
-			contact.setUser(user);
-			user.getContact().add(contact);
-			userRepo.save(user);
+			contactService.clearUserCache(user.getId()); // ✅ Clear all cached pages for user
+			contactService.saveContact(contact, user); // ✅ cache cleared after add
 
 			redirectAttributes.addFlashAttribute("message", new Message("Your contact is added!", "success"));
 		} catch (Exception e) {
@@ -112,7 +111,7 @@ public class UserController {
 		User user = userRepo.findByUserName(principal.getName());
 
 		Pageable pageable = PageRequest.of(page, 4);
-		Page<Contact> contacts = contactRepo.findContactByUser(user.getId(), pageable);
+		Page<Contact> contacts = contactService.getContactsByUserPaginated(user.getId(), pageable);
 
 		model.addAttribute("contacts", contacts);
 		model.addAttribute("currentPage", page);
@@ -151,11 +150,14 @@ public class UserController {
 	public String deleteContact(@PathVariable("cid") Integer cid, RedirectAttributes redirectAttributes,
 			Principal principal) {
 		Contact contact = contactRepo.findById(cid).orElse(null);
+		User user = userRepo.findByUserName(principal.getName());
 
-		if (contact != null) {
-			User user = userRepo.findByUserName(principal.getName());
-			user.getContact().remove(contact);
-			userRepo.save(user);
+		if (contact != null && contact.getUser().getId() == user.getId()) {
+			// User user = userRepo.findByUserName(principal.getName());
+			// user.getContact().remove(contact);
+			// userRepo.save(user);
+			contactService.deleteContact(contact, user); // ✅ cache cleared
+			contactService.clearUserCache(user.getId());
 			redirectAttributes.addFlashAttribute("message", new Message("Contact deleted successfully", "success"));
 		}
 

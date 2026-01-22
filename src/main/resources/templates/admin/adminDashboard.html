@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/adminBase :: layout(~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>ContactManager-AdminPage</title>
+</head>
+<body>
+
+	<!-- User profile -->
+	<section>
+
+		<div class="card-shadow">
+			<div class="cardheading ">
+
+				<h1>Admin Page</h1>
+			</div>
+
+			<div class="userTable">
+
+				<table border="1">
+					<tr>
+						<th>ID</th>
+						<th>NAME</th>
+						<th>EMAIL</th>
+						<th>ROLE</th>
+						<th>Contacts</th>
+					</tr>
+
+					<tr th:each="user : ${users}">
+						<td th:text="${user.id}"></td>
+						<td th:text="${user.name}"></td>
+						<td th:text="${user.email}"></td>
+						<td th:text="${user.role}"></td>
+
+						<td><a class="delete-btn"
+							th:href="@{/admin/delete/{id}(id=${user.id})}"
+							onclick="return confirm('Are you sure?')">Delete</a>
+							<a	class="delete-btn"
+							th:href="@{/admin/profile/{id}(id=${user.id})}"
+							>Profile</a></td>
+
+					</tr>
+
+				</table>
+			</div>
+
+
+
+
+
+
+		</div>
+	</section>
+
+
+
+</body>
+</html>

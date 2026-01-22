@@ -71,12 +71,175 @@
 	padding: 20px;
 }
 
+/* Here is Admin all User table css */
+.userTable table {
+	width: 100%;
+	border-collapse: collapse;
+	background: white;
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.userTable th {
+	background: #2c3e50;
+	color: white;
+	padding: 15px;
+}
+
+.userTable td {
+	background: #666;
+	padding: 12px;
+	text-align: center;
+	font-size: 18px;
+	color: #fff;
+}
+
+.delete-btn {
+	background: linear-gradient(45deg, #667eea, #764ba2); color : white;
+	padding: 8px 12px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+}
+
+.search-box {
+	margin: 20px 0;
+}
+
+.search-box input {
+	padding: 10px;
+	width: 250px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+.search-box button {
+	padding: 10px 15px;
+	border: none;
+	background: #3498db;
+	color: white;
+	border-radius: 5px;
+}
+
+.cardheading h1 {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+}
+
+/* Admin user profile page css  */
+.admin.card {
+	background: white;
+	padding: 20px;
+	border-radius: 10px;
+	width: 50%;
+}
+
+.admin table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.admin th, td {
+	padding: 12px;
+	border: 1px solid #ddd;
+}
+
+/* Here is user profile for Admin page */
+.profile-title {
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* User card */
+.admincard {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	background: #ffffff;
+	padding: 25px;
+	border-radius: 12px;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 15px;
+	margin-bottom: 30px;
+}
+
+.admincard p {
+	font-size: 16px;
+	color: #555;
+}
+
+.admincard b {
+	color: #2c3e50;
+}
+
+/* Contacts title */
+.contacts-title {
+	margin-top:40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 22px;
+	margin-bottom: 15px;
+	color: #2c3e50;
+}
+
+/* Table */
+.modern-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #ffffff;
+	border-radius: 10px;
+	overflow: hidden;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.modern-table th {
+	background: #34495e;
+	color: white;
+	padding: 14px;
+	font-weight: 500;
+}
+
+.modern-table td {
+	padding: 12px;
+	text-align: center;
+	color: #555;
+	border-bottom: 1px solid #eee;
+}
+
+.modern-table tr:hover {
+	background: #f4f6f8;
+}
+
+/* Badge */
+.role-badge {
+	background: #3498db;
+	color: white;
+	padding: 4px 10px;
+	border-radius: 20px;
+	font-size: 13px;
+}
+
+/* Responsive */
+@media ( max-width :768px) {
+	.profile-title {
+		text-align: center;
+	}
+}
+
 @media ( max-width : 768px) {
 	.cardbody {
 		flex-direction: column; /* STACK */
 		gap: 25px;
 		text-align: center;
-		margin-left:30px;
+		margin-left: 30px;
 	}
 	.box2 {
 		min-width: 100%;

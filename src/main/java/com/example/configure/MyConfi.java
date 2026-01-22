@@ -1,5 +1,6 @@
 package com.example.configure;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,6 +13,9 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class MyConfi {
+	
+	@Autowired
+	private CustomUrlHandler successHandler;
 
 	@Bean
 	public UserDetailsService getUserDetailService() {
@@ -40,19 +44,26 @@ public class MyConfi {
 	public SecurityFilterChain securityFilter(HttpSecurity http) throws Exception {
 		http.authenticationProvider(daoAuthentication())
 
-				.authorizeHttpRequests(requests -> requests.requestMatchers("/admin/**").hasRole("ADMIN")
-						.requestMatchers("/user/**").hasRole("USER").requestMatchers("/api/auth/**").permitAll() // allow
-																													// API
-																													// login
-						.requestMatchers("/**").permitAll().anyRequest().authenticated())
+				.authorizeHttpRequests(requests -> requests.
+						requestMatchers("/admin/**").hasRole("ADMIN")
+						.requestMatchers("/user/**").hasRole("USER")
+						.requestMatchers("/api/auth/**").permitAll() // allow
+					  	.requestMatchers("/**").permitAll() 
+					  	.anyRequest().authenticated())
 
 				// 🔐 Form Login setup
-				.formLogin(form -> form.loginPage("/loginPage").loginProcessingUrl("/dologin")
-						.defaultSuccessUrl("/user/index", true).permitAll())
-
+				.formLogin(form -> form
+						.loginPage("/loginPage")
+						.loginProcessingUrl("/dologin")
+						.successHandler(successHandler).permitAll()
+           )
+				
 				// 🔐 Logout setup
-				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/"))
+				.logout(logout -> logout
+						.logoutUrl("/logout")
+						.logoutSuccessUrl("/"))
 
+				
 				// 🔐 Disable CSRF for API (you may need finer control in production)
 				.csrf(csrf -> csrf.disable());
 

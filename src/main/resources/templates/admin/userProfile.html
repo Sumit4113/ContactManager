@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/adminBase :: layout(~{::section})">
+
+<head>
+<meta charset="UTF-8">
+<title>Contact User Profile</title>
+
+
+</head>
+
+<body>
+
+	<section class="admin">
+		<div class="card-shadow">
+			<h2 class="profile-title">👤 User Profile</h2>
+			<!-- User Info -->
+			<div class="cardbody">
+
+				<div class="box-img">
+					<img
+						th:src="${user.imageUrl != null} ? ${user.imageUrl} : @{/images/default.png}"
+						alt="Profile Picture" class="rounded-circle img-thumbnail"
+						style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);" />
+
+				</div>
+				<p>
+					<b>UserID:</b> <span th:text="${user.id}"></span>
+				</p>
+				<p>
+					<b>Name:</b> <span th:text="${user.name}"></span>
+				</p>
+				<p>
+					<b>Email:</b> <span th:text="${user.email}"></span>
+				</p>
+				<p>
+					<b>Role:</b> <span class="role-badge" th:text="${user.role}"></span>
+				</p>
+			</div>
+
+			<!-- Contacts -->
+			<h3 class="contacts-title">📞 User Contacts</h3>
+
+			<table class="modern-table">
+				<tr>
+					<th>Name</th>
+					<th>Phone</th>
+					<th>Email</th>
+					<th>Work</th>
+					<th>Address</th>
+				</tr>
+
+				<tr th:each="c:${contacts}">
+					<td th:text="${c.username}"></td>
+					<td th:text="${c.phone}"></td>
+					<td th:text="${c.email}"></td>
+					<td th:text="${c.jobTitle}"></td>
+					<td th:text="${c.address}"></td>
+				</tr>
+			</table>
+
+		</div>
+	</section>
+
+</body>
+</html>
