@@ -19,7 +19,7 @@
 }
 
 body {
-	background: linear-gradient( 180deg, silver, #fff);
+	background: linear-gradient(180deg, silver, #fff);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -178,8 +178,9 @@ body {
 
 			<!-- Success message (optional if redirected after registration) -->
 
-			<div th:if="${session.message}" class="alert-success"
-				th:text="${session.message}"></div>
+			<div th:if="${success}" class="alert alert-success"
+				th:text="${success}"></div>
+			<div th:if="${error}" class="alert alert-error" th:text="${error}"></div>
 
 
 			<div class="form-group">
@@ -189,7 +190,8 @@ body {
 
 			<div class="form-group">
 				<label for="password">Enter Your Password</label> <input
-					type="password" id="password" name="password" required autocomplete="new-password" />
+					type="password" id="password" name="password" required
+					autocomplete="new-password" />
 			</div>
 			<!-- Forgot password link -->
 			<div class="forgot-password">
@@ -199,7 +201,7 @@ body {
 			<button type="submit" class="login-button">Login</button>
 		</form>
 
-		
+
 
 		<div class="extra-links">
 			<p>

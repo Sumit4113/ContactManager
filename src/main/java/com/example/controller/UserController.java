@@ -135,11 +135,7 @@ public class UserController {
 		return "user/contactdetails";
 	}
 
-	@GetMapping("/profile")
-	public String userProfile() {
-		return "user/profile";
-	}
-
+	
 	@GetMapping("/settingpage")
 	public String openSettingsPage() {
 		return "user/settings";

@@ -8,8 +8,10 @@
 	<div class="container">
 		<h2>🔐 Forgot Your Password?</h2>
 
-		<div th:if="${session.message}" class="alert alert-danger"
-			th:text="${session.message}"></div>
+		<div th:if="${message}" class="alert alert-danger "
+			th:classappend="'alert-' + ${message.type}" role="alert">
+			<span th:text="${message.content}"></span>
+		</div>
 
 		<form th:action="@{/sendotps}" method="post">
 			<label>Email Address</label> <input type="email" name="email"

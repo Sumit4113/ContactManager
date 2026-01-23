@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	th:replace="admin/adminBase :: layout (~{::section})">
+<head>
+<meta charset="UTF-8">
+<title>Admin Setting</title>
+</head>
+<body>
+
+	<section class="setting">
+
+
+		<h2>⚙️ Settings</h2>
+
+
+		<div>
+			<!-- Change Password Section -->
+			<div class="password section-card">
+				<h3>🔐 Change Password</h3>
+				<!-- message.html -->
+				<div th:if="${message}" class="alert "
+					th:classappend="'alert-' + ${message.type}" role="alert">
+					<span th:text="${message.content}"></span>
+				</div>
+				<form th:action="@{/admin/changepass}" method="post">
+					<label for="oldpass">Old Password</label> <input type="password"
+						name="oldpass" id="oldpass" required> <label for="newpass">New
+						Password</label> <input type="password" name="newpass" id="newpass"
+						required>
+
+					<button type="submit">Change Password</button>
+				</form>
+
+
+				<hr>
+
+				<!-- Update Profile Section -->
+				<div class="profileupdate section-card">
+					<h3>👤 Update Profile</h3>
+					<!-- message.html -->
+					<div th:if="${message}" class="alert "
+						th:classappend="'alert-' + ${message.type}" role="alert">
+						<span th:text="${message.content}"></span>
+					</div>
+					<form th:action="@{/admin/adminUpdate}" method="post">
+						<label for="name">Name</label> <input type="text" name="name"
+							id="name" th:value="${admin.name}" required> <label
+							for="email">Email</label> <input type="email" name="email"
+							id="email" th:value="${admin.email}" readonly>
+						<div class="form-group">
+							
+						</div>
+
+
+						<button type="submit">Update Profile</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+	</section>
+	<script>
+  // Auto-hide alert message after 3 seconds
+  setTimeout(() => {
+    const alertBox = document.querySelector('.alert');
+    if (alertBox) {
+      alertBox.style.opacity = '0';
+      setTimeout(() => alertBox.style.display = 'none', 500);
+    }
+  }, 3000); // 3000ms = 3 seconds
+</script>
+</body>
+</html>

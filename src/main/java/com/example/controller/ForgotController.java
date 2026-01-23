@@ -36,7 +36,7 @@ public class ForgotController {
 	}
 
 	@PostMapping("/sendotps")
-	public String sendOtp(@RequestParam("email") String email, HttpSession session) {
+	public String sendOtp(@RequestParam("email") String email, HttpSession session, RedirectAttributes redirectAttribute) {
 		int otp = random.nextInt(999999);
 		String subject = "OTP FROM SCM";
 		String message = "<h1> OTP =" + otp + "</h1>";
